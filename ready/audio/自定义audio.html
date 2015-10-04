@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>自定义audio</title>
+	<style>
+	body {position: relative;height: 800px;}
+	.music_ball {width: 200px; height: 200px; background: #DDD; border-radius: 100%; overflow: hidden; position: absolute; text-align: center; vertical-align: middle; top: 0px; left: 0px;}
+	.music_content {position: absolute;top: 0;left: 0;bottom: 0;right: 0;margin: auto;display: inline-block;text-overflow:ellipsis;width: 80%;height: 114px;color: #E9EAEA;}
+	.audio {width: 0;height: 0;}
+	.singer {display: inline-block;line-height: 32px;font-size: 14px;}
+	.button {width: 50px; height: 50px;line-height: 50px;display: inline-block;cursor: pointer;}
+	.song {display: inline-block;line-height: 32px;font-size: 14px;}
+	</style>
+	<script src="script/move2.js" rel="text/javascript"></script>
+	<script>
+	var json=[{"music_URL1":"music/周玥 - 至少还有你.ogg",
+	"music_URL2":"music/周玥 - 至少还有你.mp3",
+	"song_name":"至少还有你",
+	"singer_name":"周玥"},
+	{"music_URL1":"music/莫文蔚 - 阴天.ogg",
+	"music_URL2":"music/莫文蔚 - 阴天.mp3",
+	"song_name":"莫文蔚 - 阴天",
+	"singer_name":"莫文蔚"}]
+	window.onload=function(){
+
+		createBall(json);
+		var aBalls=document.getElementsByClassName("music_ball");
+		for(var i=0;i<aBalls.length;i++){
+			var this_=this;
+			var aBalls_wh=random(150,250);
+			aBalls[i].style.width=aBalls_wh+"px";
+			aBalls[i].style.height=aBalls_wh+"px";
+			var parent_width=parseInt(getStyle(aBalls[i].parentNode,'width'));
+			var parent_height=parseInt(getStyle(aBalls[i].parentNode,'height'));
+			var top=random(0,(parent_height-aBalls_wh));
+			var left=random(0,(parent_width-aBalls_wh));
+			aBalls[i].style.top=top+"px";
+			aBalls[i].style.left=left+"px";
+
+			var color=random(100,999);
+			aBalls[i].style.backgroundColor='#'+color;
+
+			aBalls[i].onclick=function(){
+				var aBalls=document.getElementsByClassName("music_ball");
+				for(var j=0;j<aBalls.length;j++){
+					aBalls[j].setAttribute("id","");
+				}
+				this.setAttribute("id","active");
+			}
+
+			// var aBalls[i].oldWidth=getStyle(aBalls[i],"width");
+			// var aBalls[i].oldHeight=getStyle(aBalls[i],"width");
+			aBalls[i].onmouseenter=function(){
+				startMove(this,{"width":aBalls_wh+150,"height":aBalls_wh+150})
+			}
+			aBalls[i].onmouseleave=function(){
+				startMove(this,{"width":aBalls_wh,"height":aBalls_wh})
+			}
+		}
+		
+		
+	}
+	//获取元素的真实样式数值
+    function getStyle(obj,name){
+    	if(obj.currentStyle){
+    		return obj.currentStyle[name];
+    	}else{
+    		return getComputedStyle(obj,false)[name];
+    	}
+    }
+
+	//带范围的随机函数
+	function random(iMin,iMax)
+	{
+		return(parseInt(Math.random()*(iMax-iMin)+iMin));
+	}
+
+	//传入json创建小球
+	function createBall(json){
+
+		for(var i in json){
+			var music_URL1=json[i].music_URL1;
+			var music_URL2=json[i].music_URL2;
+			var song_name=json[i].song_name;
+			var singer_name=json[i].singer_name;
+			createBall_in();
+		}
+
+		function createBall_in(){
+			var music_ball=document.createElement('div');
+			music_ball.className="music_ball";
+
+			var audio=document.createElement('audio')
+			audio.className="audio";
+
+			var source1=document.createElement('source');
+			source1.className="source1";
+			source1.setAttribute("src",music_URL1);
+
+			var source2=document.createElement('source');
+			source2.className="source2";
+			source2.setAttribute("src",music_URL2);
+
+			audio.appendChild(source1);
+			audio.appendChild(source2);
+			music_ball.appendChild(audio);
+
+			var music_content=document.createElement("div");
+			music_content.className="music_content";
+
+			var song=document.createElement("span");
+			song.className="song";
+			song.innerHTML=song_name;
+
+			var button=document.createElement("img");
+			button.className="button";
+			button.setAttribute("src","img/icon/play.png");
+
+			var singer=document.createElement("span");
+			singer.className="singer";
+			singer.innerHTML=singer_name;
+
+			music_content.appendChild(song);
+			music_content.appendChild(button);
+			music_content.appendChild(singer);
+
+			var br=document.createElement("br");
+			music_content.insertBefore(br,singer);
+			var br=document.createElement("br");
+			music_content.insertBefore(br,button);
+
+			music_ball.appendChild(music_content);
+			document.body.appendChild(music_ball);
+
+			button.onclick=function(){
+				music_ball.setAttribute("id","active");
+				if(audio.ended){
+					audio.currentTime=0;
+				}
+				if(audio.paused){
+					audio.play();
+					this.setAttribute("src","img/icon/pause.png")
+				}else{
+					audio.pause();
+					this.setAttribute("src","img/icon/play.png")
+				}
+			}
+		}
+	}
+	</script>
+</head>
+<body>
+<!-- <div class="music_ball">
+	<audio class="audio">
+		<source class="source1" src="music/周玥 - 至少还有你.ogg"></source>
+		<source class="source2" src="music/周玥 - 至少还有你.mp3"></source>
+	</audio>
+	<div class="music_content">
+		<span class="song">song</span><br/>
+		<img class="button" src="img/icon/play.png" alt="play"><br/>
+		<span class="singer">singer</span>
+	</div> -->
+</div>
+</body>
+</html>

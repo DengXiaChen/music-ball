@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test</title>
+	<script src="move2.js"></script>
+	<style>
+	* {margin: 0; padding: 0;}
+	#wrapper {height: 500px; background: #DDD; position: relative; overflow: hidden;}
+	#wrapper div {width: 1px; height: 1px; border-radius: 100%; background: white; position: absolute; top: 0; left: 0;}
+	</style>
+	<script>
+	function random(iMin,iMax){
+		return(parseInt(Math.random()*(iMax-iMin))+iMin);
+	}
+	function randomMove(oDiv,iRange)
+	{
+		var left=oDiv.offsetLeft;
+		var top=oDiv.offsetTop;
+		setInterval(function(){
+			var iLeft=random(0,iRange);
+			var iTop=random(0,iRange);
+			startMove(oDiv,{'left':left+iLeft,'top':top+iTop});
+		},1000);
+	}
+	window.onload=function()
+	{
+		var oWrapper=document.getElementById('wrapper');
+		var oStart=document.getElementById('start');
+		var oStop=document.getElementById('stop');
+
+		oStart.onclick=function()
+		{
+			var oBall=document.createElement('div');
+			var iTag=random(100,999);
+			var iTag1=random(0,wrapper.offsetHeight);
+			var iTag2=random(0,wrapper.offsetWidth);
+			oBall.style.top=iTag1+'px';
+			oBall.style.left=iTag2+'px';
+			oBall.style.backgroundColor='#'+iTag;
+			oWrapper.appendChild(oBall);
+			var iTag_wh=random(100,300);
+			startMove(oBall,{'width':iTag_wh,'height':iTag_wh,'top':(random(100,oWrapper.offsetHeight)-iTag_wh),'left':(random(100,oWrapper.offsetWidth)-iTag_wh)});
+			setTimeout(function(){
+			var aBall=wrapper.getElementsByTagName('div');
+			for(var i=0;i<aBall.length;i++)
+			{
+				randomMove(aBall[i],400);
+			}
+		},800)
+		}
+		for(var i=0;i<30;i++)
+		{
+			oStart.onclick();
+		}
+		
+		
+	}
+	</script>
+</head>
+<body>
+	<div id="wrapper">
+		
+	</div>
+	<input id="start" type="button" value="创建小球">
+	<input id="stop" type="button" value="删除小球">
+</body>
+</html>
