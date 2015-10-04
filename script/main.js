@@ -1,22 +1,16 @@
 window.onload=function(){
-	var json=[
-	    {
-	        "music_URL1": "http://yinyueshiting.baidu.com/data2/music/136637540/11202591443232861320.mp3?xcode=4dba6cc7e7a730d48e84979b09d702df",
-	        "music_URL2": "http://yinyueshiting.baidu.com/data2/music/136637540/11202591443232861320.mp3?xcode=4dba6cc7e7a730d48e84979b09d702df",
-	        "song_name": "至少还有你",
-	        "singer_name": "张国荣"
-	    },
-	    {
-	        "music_URL1": "http://file.qianqian.com//data2/music/134368537/134368537.mp3?xcode=e31fe004fbdd44abbdfb5657fcf2438e",
-	        "music_URL2": "music/莫文蔚 - 阴天.mp3",
-	        "song_name": "莫文蔚 - 阴天",
-	        "singer_name": "莫文蔚"
-	    }
-	];
-	for(var i in json){
-		var oDiv=document.getElementById("content");
-		new CreateBall(json[i],oDiv);
-	}
+	// var json=[{"music_URL1":"music/周玥 - 至少还有你.ogg",
+	// "music_URL2":"music/周玥 - 至少还有你.mp3",
+	// "song_name":"至少还有你",
+	// "singer_name":"周玥"},
+	// {"music_URL1":"music/莫文蔚 - 阴天.ogg",
+	// "music_URL2":"music/莫文蔚 - 阴天.mp3",
+	// "song_name":"莫文蔚 - 阴天",
+	// "singer_name":"莫文蔚"}];
+	// for(var i in json){
+	// 	var oDiv=document.getElementById("content");
+	// 	new CreateBall(json[i],oDiv);
+	// }
 	var oMusic=document.getElementById("music");
 	var oSinger=document.getElementById("singer");
 	var oSou1=document.getElementById("sour1");
@@ -28,24 +22,27 @@ window.onload=function(){
 	var oMusic_box=document.getElementById("music_box");
 	var aButton=document.getElementsByClassName("button");
 
-	// oSwitch.onclick=function(){
-	// 	oDiv.innerHTML="";
-	// 	oMusic.innerHTML="歌曲名";
-	// 	oSinger.innerHTML="歌手";
-	// 	oSou1.setAttribute("src","");
-	// 	oSou2.setAttribute("src","");
-	// 	oAudio.load();
-	// 	oPicture.style.backgroundColor="#66CCCC";
-	// 	ajax("text.json?t="+new Date().getTime(),function(str){
-	// 		var json=eval(str);
-	// 		for(var i in json){
-	// 			var oDiv=document.getElementById("content");
-	// 			new CreateBall(json[i],oDiv);
-	// 		}
-	// 	},function(){
-	// 		alert("失败");
-	// 	})
-	// }
+	
+	oSwitch.onclick=function(){
+		oDiv.innerHTML="";
+		oMusic.innerHTML="歌曲名";
+		oSinger.innerHTML="歌手";
+		oSou1.setAttribute("src","");
+		oSou2.setAttribute("src","");
+		oAudio.load();
+		oPicture.style.backgroundColor="#66CCCC";
+		ajax("text1.json?t="+new Date().getTime(),function(str){
+			var json=eval(str);
+			for(var i in json){
+				var oDiv=document.getElementById("content");
+				new CreateBall(json[i],oDiv);
+			}
+		},function(){
+			alert("失败");
+		})
+	}
+
+	oSwitch.onclick();
 
 	oAudio.addEventListener("play",function(){
 		if(document.getElementById("active")){

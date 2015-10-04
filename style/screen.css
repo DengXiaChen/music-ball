@@ -1,0 +1,139 @@
+body
+{
+	background: #339999;
+	width: 100%;
+	min-width: 1080px;
+}
+
+#header
+{
+	width: 100%;
+	height: 100px;
+	background: #339999;
+	text-align: center;
+	padding-top: 10px;
+}
+
+#header_box
+{
+	width: 80%;
+	min-width: 1080px;
+	height: 100%;
+	margin: auto;
+	position: relative;
+}
+
+#logo_box
+{
+	float: left;
+	padding: 10px;
+	margin-right: 50px;
+}
+
+#logo_box span
+{
+	color: #F2F2F2;
+	display: inline-block;
+	float: left;
+	font-size: 65px;
+	font-weight: 300;
+	line-height: 45px;
+	margin-top: 30px;
+}
+
+#logo {
+	width: 95px;
+	height: 80px;
+	float: left;
+}
+
+#play_box
+{
+	width: 410px;
+	height: 100%;
+	float: left;
+}
+
+#picture
+{
+	border-radius: 8px;
+	float: left;
+	width: 80px;
+	height: 80px;
+	margin: 10px;
+	margin-right: 10px;
+	background: #66CCCC;
+}
+
+#music_box
+{
+	color: #F2F2F2;
+	font-weight: 500;
+	text-align: left;
+	height: 90px;
+	margin-top: 10px;
+	line-height: 25px;
+}
+
+#music_box audio
+{
+	width: 300px;
+	height: 30px;
+}
+
+#switch
+{
+	cursor: pointer;
+	float: left;
+	width: 70px;
+	height: 30px;
+	border-radius: 8px;
+	background: #66CCCC;
+	margin-top: 60px;
+}
+
+#switch span
+{
+	color: #F2F2EE;
+	vertical-align: middle;
+	text-align: center;
+	display: inline-block;
+	line-height: 30px;
+}
+
+/*内容区样式*/
+
+#content_box
+{
+	background: #339999;
+	padding: 20px;
+	padding-top: 5px; 
+}
+
+#content
+{
+	/*width: 100%;*/
+	overflow: auto;
+	position: relative;
+	border-radius: 30px;
+	height: 610px;
+	background: #F2F2F2;
+	-moz-box-shadow: 10px 10px 5px #888888; /* 老的 Firefox */
+	box-shadow: 5px 5px 5px #888888;
+}
+
+footer
+{
+	height: 30px;
+	font-size: 12px;
+	text-align: center;
+	background: #339999;
+	color: #F2F2F2;
+}
+
+.music_ball {width: 30px; height: 30px; background: #DDD; border-radius: 100%; overflow: hidden; position: absolute; text-align: center; vertical-align: middle; top: 0px; left: 0px;-moz-box-shadow: 10px 10px 5px #888888; box-shadow: 5px 5px 5px #888888;}
+.music_content {position: absolute;top: 0;left: 0;bottom: 0;right: 0;margin: auto;display: inline-block;text-overflow:ellipsis;width: 80%;height: 114px;color: #E9EAEA;}
+.audio_box {width: 0;height: 0;}
+.singer {display: inline-block;line-height: 32px;font-size: 14px;}
+.button {width: 50px; height: 50px;line-height: 50px;display: inline-block;cursor: pointer;}
+.song {display: inline-block;line-height: 32px;font-size: 14px;}
